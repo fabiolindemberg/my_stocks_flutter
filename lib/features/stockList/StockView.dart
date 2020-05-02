@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:my_stocks/common/entities/stock.dart';
+import 'package:my_stocks/features/stockForm/StockFormView.dart';
 import 'StockViewModel.dart';
 
 class StockView extends StatefulWidget {
@@ -36,6 +37,19 @@ class _StockViewState extends State<StockView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: <Widget>[
+          Padding(
+      padding: EdgeInsets.only(right: 20.0),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push( MaterialPageRoute(builder: (context) => StockFormView(title: 'Ativo')));
+          },
+          child: Icon(
+              Icons.plus_one
+          ),
+          )
+          )
+        ],
       ),
       body: Center(
         child: Directionality(
