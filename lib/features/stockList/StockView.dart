@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:my_stocks/common/entities/stock.dart';
 import 'package:my_stocks/features/stockForm/StockFormView.dart';
+import 'package:my_stocks/features/stockList/StockModel.dart';
 import 'StockViewModel.dart';
 
 class StockView extends StatefulWidget {
@@ -16,25 +17,22 @@ class StockView extends StatefulWidget {
 
 class _StockViewState extends State<StockView> {
   StockViewModel viewModel;
+  ViewModelState state = ViewModelState.initial;
 
   _StockViewState() {
-    viewModel = StockViewModel(didUpdateState: didUpdateState);
+    viewModel = StockViewModel(model: StockModelImpl());
+    viewModel.didUpdateState = didUpdateState;
   }
 
   didUpdateState(ViewModelState state) {
-    switch(state) {
-      case ViewModelState.loaded: 
-        setState(() {
-          
-        });
-        break;
-      default: break;
-    }
+    this.state = state;
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: Key("stock_list"),
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
@@ -52,19 +50,36 @@ class _StockViewState extends State<StockView> {
         ],
       ),
       body: Center(
-        child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: ListView.separated(
-              separatorBuilder: (context, index) => Divider(
-                color: Colors.black,
-              ),
-              itemCount: viewModel.stocks == null ? 0 : viewModel.stocks.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListItem(viewModel.stocks[index]).build(context);
-            },),
-        ),
+        child: buidContent(),
       ),
     );
+  }
+
+  Widget buidContent() {
+    switch (state) {
+      case ViewModelState.error: 
+        return Text("Não foi possível fazer a consulta!");
+        break;
+      case ViewModelState.processing:
+        return CircularProgressIndicator();
+        break;
+      default: 
+        return buildListView();
+    }
+  }
+
+  Widget buildListView() {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: ListView.separated(
+            separatorBuilder: (context, index) => Divider(
+              color: Colors.black,
+            ),
+            itemCount: viewModel.stocks == null ? 0 : viewModel.stocks.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListItem(viewModel.stocks[index]).build(context);
+          },),
+      );
   }
 }
 

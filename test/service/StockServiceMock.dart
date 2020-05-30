@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:my_stocks/common/entities/stock.dart';
-import 'package:my_stocks/services/StockService.dart';
+import 'package:my_stocks/features/stockList/StockModel.dart';
 
-class StockServiceMock implements StockService {
+class StockServiceMock implements StockModel {
   @override
   Future fetchStocks(Function complition) async {
     
@@ -17,16 +17,4 @@ class StockServiceMock implements StockService {
 
     return null;
   }
-
-}
-
-class StockServiceMockError implements StockService {
-  @override
-  Future fetchStocks(Function complition) async {
-    await Future.delayed(const Duration(seconds : 1), (){
-      complition(null, Exception("Erro na api!"));
-    }) ;
-    return null;
-  }
-
 }

@@ -1,7 +1,6 @@
 
 
 import 'package:my_stocks/common/entities/stock.dart';
-import 'package:my_stocks/services/StockService.dart';
 
 import 'StockModel.dart';
 
@@ -9,23 +8,24 @@ class StockViewModel {
 
   Function didUpdateState;
   List<Stock> stocks;
+  StockModel model;
 
-  StockViewModel({this.didUpdateState}) {
+  StockViewModel({this.model}) {
     fetchStocks();
   }
 
   void fetchStocks() {
-    StockModel(StockServiceImpl()).fetchStocks(_oncComplete);
+    model.fetchStocks(_oncComplete);
   }
 
   void _oncComplete(List<Stock> stocks, error) {
+
     if (error == null) {
       this.stocks = stocks;
       didUpdateState(ViewModelState.loaded);
     } else {
       didUpdateState(ViewModelState.error);
     }
-    
   }
 }
 

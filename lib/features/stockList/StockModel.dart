@@ -1,12 +1,33 @@
-import 'package:my_stocks/services/StockService.dart';
+import 'dart:convert';
 
-class StockModel {
+import 'package:my_stocks/common/entities/stock.dart';
+import 'package:my_stocks/services/BaseService.dart';
 
-  StockService service;
+abstract class StockModel {
+  fetchStocks(Function completion) async {} 
+}
 
-  StockModel(this.service);
+class StockModelImpl extends BaseService implements StockModel{
 
-  Future fetchStocks(Function complition) async {
-    service.fetchStocks(complition);
+  @override
+  fetchStocks(Function completion) async {
+      request(super.baseUrl).then( (response) {
+
+      print("Response body: ${response.body.toString()}");
+      
+      var jsonMap = jsonDecode(response.body.toString());
+      
+      List<Stock> stocks = List<Stock>();
+
+      jsonMap.forEach( (mapStock) {
+        stocks.add(Stock.fromJson(mapStock));
+      });
+
+      completion(stocks, null);
+    }).catchError( (error) {
+      
+      print("Error: $error");
+      completion(null, error);
+    });
   }
 }
