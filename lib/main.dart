@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'features/stockList/StockView.dart';
+import 'package:my_stocks/features/onboarding/onBoarding.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: StockView(title: 'Ativos'),
+      home: OnBoarding(),
     );
   }
 }
