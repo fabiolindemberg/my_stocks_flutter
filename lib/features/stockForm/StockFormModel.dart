@@ -3,16 +3,18 @@ import 'dart:convert';
 import 'package:my_stocks/common/entities/stock.dart';
 import 'package:my_stocks/services/BaseService.dart';
 
-abstract class StockModel {
-  fetchStocks(Function completion) async {} 
+abstract class StockFormModel {
+  add(Stock stock, Function completion) async {} 
 }
 
-class StockModelImpl extends BaseService implements StockModel{
+class StocFormkModelImpl extends BaseService implements StockFormModel{
 
   @override
-  fetchStocks(Function completion) async {
+  add(Stock stock, Function completion) async {
       String endpoint = "/tabs/stocks";
-      get(super.fromUrl(endpoint)).then( (response) {
+      String body = jsonEncode(stock.toJson());
+      print("Body: $body");
+      post(body, super.fromUrl(endpoint)).then( (response) {
 
       print("Response body: ${response.body.toString()}");
       

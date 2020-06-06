@@ -17,4 +17,13 @@ class Stock {
     stock.reference = json['reference'] != null ? double.parse(json['reference'].replaceAll(",", ".")) : 0.0; 
     return stock;
   }
+
+  Map toJson() => {
+    'code': code,
+    'company': company,
+    'dividend': "FALSE",
+    'evaluation': "FALSE",
+    'price': '0,0',
+    'reference': '0,0'
+  };
 }

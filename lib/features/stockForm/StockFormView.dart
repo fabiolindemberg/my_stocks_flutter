@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_stocks/features/stockForm/StockFormViewModel.dart';
+
+import 'StockFormModel.dart';
 
 class StockFormView extends StatefulWidget {
   StockFormView({Key key, this.title}) : super(key: key);
@@ -11,8 +14,31 @@ class StockFormView extends StatefulWidget {
 }
 
 class _StockFormView extends State<StockFormView> {
-  
+  StockFormViewModel viewModel;
+  ViewModelState state = ViewModelState.initial;
+
+  final tickerController = TextEditingController();
+  final companyController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  
+  _StockFormView() {
+    viewModel = StockFormViewModel(model: StocFormkModelImpl());
+    viewModel.didUpdateState = didUpdateState;
+  }
+
+  didUpdateState(ViewModelState state) {
+    this.state = state;
+
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    tickerController.dispose();
+    companyController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +64,15 @@ class _StockFormView extends State<StockFormView> {
                 // Validate returns true if the form is valid, or false
                 // otherwise.
                 if (_formKey.currentState.validate()) {
+
                   // If the form is valid, display a Snackbar.
+                  viewModel.add(
+                    ticker: tickerController.text, 
+                    company: companyController.text);
+
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Processing Data')));
                 }
-
               },
               child: Icon(
               Icons.save
@@ -54,9 +84,26 @@ class _StockFormView extends State<StockFormView> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: form(),
+          child: buildContent(),
         )),
     );
+  }
+
+  Widget buildContent() {
+    switch (state) {
+      case ViewModelState.error: 
+        return Text("Não foi possível enviar o formulário!");
+        break;
+      case ViewModelState.processing:
+        return CircularProgressIndicator();
+        break;
+      case ViewModelState.loaded:
+        Navigator.of(context).pop();
+        return form();
+        break;
+      default: 
+        return form();
+    }
   }
 
   Widget form() {
@@ -66,17 +113,18 @@ class _StockFormView extends State<StockFormView> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-           _textField("Ticker", null),
-           _textField("Company", null)
+           _textField("Ticker", null, tickerController),
+           _textField("Company", null, companyController)
         ]
      )
     );
   }
 
-Widget _textField(String placeholder, String textValidation) {
+Widget _textField(String placeholder, String textValidation, TextEditingController controller) {
   return Padding(
     padding: EdgeInsets.all(8.0),
     child:  TextFormField(
+      controller: controller,
             // The validator receives the text that the user has entered.
             validator: (value) {
               if (value.isEmpty) {

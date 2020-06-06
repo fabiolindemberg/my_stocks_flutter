@@ -1,3 +1,4 @@
+
 import 'package:http/http.dart' as http;
 
 class BaseService {
@@ -8,10 +9,25 @@ class BaseService {
     return urlRequest;
   }
 
-  Future<http.Response> request(String url) {
+  Future<http.Response> get(String url) {
     var httpClient = http.Client();
     try{
       return httpClient.get(url);
+    } finally {
+      httpClient.close();
+    } 
+  }
+
+  Future<http.Response> post(String body, String url) {
+    var httpClient = http.Client();
+    try{
+      return httpClient.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: body
+        );
     } finally {
       httpClient.close();
     } 

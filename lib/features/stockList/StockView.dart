@@ -62,7 +62,7 @@ class _StockViewState extends State<StockView> {
       case ViewModelState.error: 
         return Text("Não foi possível fazer a consulta!");
         break;
-      case ViewModelState.processing:
+      case ViewModelState.initial:
         return CircularProgressIndicator();
         break;
       default: 
@@ -86,8 +86,8 @@ class _StockViewState extends State<StockView> {
 
 class ListItem extends StatelessWidget {
 
-  Stock stock;
-  var controller = new MoneyMaskedTextController(leftSymbol: 'R\$ ');
+  final Stock stock;
+  final MoneyMaskedTextController controller = new MoneyMaskedTextController(leftSymbol: 'R\$ ');
   ListItem(this.stock) {
     controller.updateValue(stock.price);
   }
