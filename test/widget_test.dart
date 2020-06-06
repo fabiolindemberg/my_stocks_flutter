@@ -17,18 +17,21 @@ void main() {
       var onboardingPage = OnBoarding();
 
       await tester.pumpWidget(MaterialApp(home: onboardingPage));
-      expect(find.text("Itau"), findsOneWidget);
+      var expected = find.text("Welcome");
+      expect(expected, findsWidgets);
 
       var element = find.byKey(Key("onboarding"));
       await tester.drag(element, Offset(-500, 0));
       await tester.pump();
 
-      expect(find.text("Petrobras"), findsOneWidget);
+      expected = find.text("This app helps you to...");
+      expect(expected, findsOneWidget);
 
       await tester.drag(element, Offset(500, 0));
       await tester.pump();
 
-      expect(find.text("Itau"), findsOneWidget);
+      expected = find.text("This app helps you to...");
+      expect(expected, findsOneWidget);
     });
 
     testWidgets('Reaches the last page',

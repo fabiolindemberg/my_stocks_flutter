@@ -11,13 +11,12 @@ class StocFormkModelImpl extends BaseService implements StockFormModel{
 
   @override
   add(Stock stock, Function completion) async {
+
       String endpoint = "/tabs/stocks";
       String body = jsonEncode(stock.toJson());
-      print("Body: $body");
+
       post(body, super.fromUrl(endpoint)).then( (response) {
 
-      print("Response body: ${response.body.toString()}");
-      
       var jsonMap = jsonDecode(response.body.toString());
       
       List<Stock> stocks = List<Stock>();
@@ -29,7 +28,6 @@ class StocFormkModelImpl extends BaseService implements StockFormModel{
       completion(stocks, null);
     }).catchError( (error) {
       
-      print("Error: $error");
       completion(null, error);
     });
   }

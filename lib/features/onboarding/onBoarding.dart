@@ -15,12 +15,11 @@ class OnBoarding extends StatelessWidget {
     return PageView(
       key: Key("onboarding"),
       children: <Widget>[
-      this.pageItem(OnBoardingItem("images/itau.jpeg", "Itau", "Follow the count of large companies", null)),
-      this.pageItem(OnBoardingItem("images/petrobras.jpeg", "Petrobras", "With investment indication", null)),
-      this.pageItem(OnBoardingItem("images/cielo.jpeg", "Cielo", "Information is money!", Button("Get Started Now!!", () {
+      this.pageItem(OnBoardingItem("images/itau.jpeg", "Welcome", "This app helps you to...", null)),
+      this.pageItem(OnBoardingItem("images/petrobras.jpeg", "Welcome", "See informations about you stoks", null)),
+      this.pageItem(OnBoardingItem("images/cielo.jpeg", "Welcome", "Be smart!", Button("Get Started!", () {
         Navigator.of(context).push(MaterialPageRoute(builder: (contex) => StockView(title: "Ativos",)));
       }))),
-
     ],);
   }
 

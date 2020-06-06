@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:my_stocks/common/ViewModelState.dart';
 import 'package:my_stocks/common/entities/stock.dart';
 import 'package:my_stocks/features/stockDetail/StockDetailView.dart';
 import 'package:my_stocks/features/stockForm/StockFormView.dart';

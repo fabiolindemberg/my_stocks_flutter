@@ -8,8 +8,8 @@ class StockDetailView extends StatefulWidget{
   State<StatefulWidget> createState() => _StockDetailView();
 }
 
-
 class _StockDetailView extends State<StockDetailView> {
+
   @override
   Widget build(BuildContext context) {
 
@@ -48,21 +48,21 @@ class _StockDetailView extends State<StockDetailView> {
     );
   }
 
-  // user defined function
+  // Custom methods
+
   Widget _showDialog() {
-    // flutter defined function
+
     return AlertDialog(
-          title: new Text("Sorry!"),
-          content: new Text("This content is not avilable!"),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+      title: new Text("Sorry!"),
+      content: new Text("This content is not avilable!"),
+      actions: <Widget>[
+        new FlatButton(
+          child: new Text("Close"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
   }
 }
