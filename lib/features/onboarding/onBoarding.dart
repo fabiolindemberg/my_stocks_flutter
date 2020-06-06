@@ -65,6 +65,7 @@ class OnBoarding extends StatelessWidget {
   Container button(Button button) {
     return Container(
                 child: RaisedButton(
+                  key: Key("button"),
                   onPressed: button.onClick,
                   child: Text(button.label,
                   style: TextStyle(

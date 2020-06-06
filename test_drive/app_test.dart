@@ -1,5 +1,5 @@
 import 'package:flutter_driver/flutter_driver.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 void main() {
   FlutterDriver driver;
@@ -16,18 +16,17 @@ void main() {
     }
   });
 
-  // test('Go through onboarding list stocks', () async {
-  //   var onboardingPage = find.byValueKey("onboarding");
-  //   WaitFor(onboardingPage);
+  test('Go through onboarding list stocks', () async {
+    var onboardingPage = find.byValueKey("onboarding");
+    WaitFor(onboardingPage);
 
-  //   await driver.scroll(onboardingPage, -300, 0, Duration(milliseconds: 500));
-  //   await driver.scroll(onboardingPage, -300, 0, Duration(milliseconds: 500));
-  //   await driver.scroll(onboardingPage, -300, 0, Duration(milliseconds: 500));
+    await driver.scroll(onboardingPage, -300, 0, Duration(milliseconds: 500));
+    await driver.scroll(onboardingPage, -300, 0, Duration(milliseconds: 500));
 
-  //   var button = find.byValueKey("button");
-  //   WaitFor(button);
+    var button = find.byValueKey("button");
+    WaitFor(button);
 
-  //   await driver.tap(button);
-  //   WaitFor(find.text("Ativos"));
-  // });
+    await driver.tap(button);
+    WaitFor(find.text("Ativos"));
+  });
 }

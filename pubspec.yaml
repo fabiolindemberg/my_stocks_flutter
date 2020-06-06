@@ -27,6 +27,7 @@ dependencies:
   flutter_masked_text: ^0.7.0
 
 dev_dependencies:
+  test:
   flutter_test:
     sdk: flutter
   flutter_driver:
