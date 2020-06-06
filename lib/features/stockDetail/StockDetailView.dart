@@ -43,8 +43,26 @@ class _StockDetailView extends State<StockDetailView> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Text("Content here"),
+          child: _showDialog(),
         )),
     );
+  }
+
+  // user defined function
+  Widget _showDialog() {
+    // flutter defined function
+    return AlertDialog(
+          title: new Text("Sorry!"),
+          content: new Text("This content is not avilable!"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
   }
 }
