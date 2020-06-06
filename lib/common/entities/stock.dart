@@ -24,6 +24,7 @@ class Stock {
     'dividend': "FALSE",
     'evaluation': "FALSE",
     'price': '0,0',
-    'reference': '0,0'
+    'reference': '0,0',
+    'count': 100
   };
 }

@@ -114,7 +114,7 @@ class _StockFormView extends State<StockFormView> {
       child: Column(
         children: <Widget>[
            _textField("Ticker", null, tickerController),
-           _textField("Company", null, companyController)
+           _textField("Company", null, companyController),
         ]
      )
     );

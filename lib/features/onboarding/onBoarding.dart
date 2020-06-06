@@ -4,7 +4,6 @@ import 'package:my_stocks/features/stockList/StockView.dart';
 
 import 'onBoardingItem.dart';
 
-
 class OnBoarding extends StatelessWidget {
   const OnBoarding({
     Key key,
@@ -58,21 +57,20 @@ class OnBoarding extends StatelessWidget {
             ),
           ),
         )
-    ],
-  );
+      ],
+    );
   }
 
   Container button(Button button) {
     return Container(
-                child: RaisedButton(
-                  key: Key("button"),
-                  onPressed: button.onClick,
-                  child: Text(button.label,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14),),
-                ),
-              );
+      child: RaisedButton(
+        key: Key("button"),
+        onPressed: button.onClick,
+        child: Text(button.label,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 14),),
+      ),
+    );
   }
 }
-

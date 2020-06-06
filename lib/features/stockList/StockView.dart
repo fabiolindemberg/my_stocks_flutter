@@ -43,7 +43,11 @@ class _StockViewState extends State<StockView> {
       padding: EdgeInsets.only(right: 20.0),
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).push( MaterialPageRoute(builder: (context) => StockFormView(title: 'Ativo')));
+            Navigator.of(context).push( MaterialPageRoute(builder: (context) => StockFormView(title: 'Ativo')))
+            .then((value) {
+              this.state = ViewModelState.initial;
+              setState(() {});
+            });
           },
           child: Icon(
               Icons.plus_one
@@ -64,6 +68,7 @@ class _StockViewState extends State<StockView> {
         return Text("Não foi possível fazer a consulta!");
         break;
       case ViewModelState.initial:
+        viewModel.fetchStocks();
         return CircularProgressIndicator();
         break;
       default: 

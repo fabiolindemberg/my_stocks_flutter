@@ -12,7 +12,6 @@ class StockViewModel {
   StockModel model;
 
   StockViewModel({this.model}) {
-    fetchStocks();
   }
 
   void fetchStocks() {
